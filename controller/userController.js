@@ -41,6 +41,7 @@ const UserLogin = router.post('/signin', async (req, res) => {
             if (isMatched) {
                 /* Create JWT */
                 const token = await jwt.sign({ id: docs._id, email: docs.email }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE });
+                res.cookie('jwt',token, { httpOnly: true, secure: false, maxAge: 3600000 })
                 res.send({
                     email: docs.email,
                     token: token

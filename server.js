@@ -5,6 +5,7 @@ const app = express();
 const chalk = require('chalk');
 const cors = require('cors');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser')
 //db
 const connectDB = require('./config/db');
 //routes
@@ -15,9 +16,11 @@ app.use(cors({
 }));
 //middlewares
 app.use(morgan('dev'));
-
+// Body-Parser
 app.use(express.json());
-
+// cookie-Parser
+app.use(cookieParser())
+// routes
 app.use('/', routes);
 //db
 connectDB().then(() => {
